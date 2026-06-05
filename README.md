@@ -223,9 +223,33 @@ make start                                 # boots :8000 + :3000, opens /market
 
 Then open <http://localhost:3000/market>.
 
-### Try it with the sample portfolio (demo mode)
+### Public demo mode — no database, no keys
 
-Asterion ships with fake demo holdings so you can run it without your own data:
+Want to see it working before wiring up Postgres or SEC? Asterion ships a
+sanitized sample dataset (deterministic public-company scorecards + the SpaceX
+IPO scorecard). One command seeds it and boots the app:
+
+```bash
+# after steps 1–3 + 5 above (backend venv + frontend deps; no DB needed)
+make demo
+```
+
+`make demo` runs `scripts/load_demo.py` (copies `examples/demo/reports/` into
+`reports/`, pins the calibration profile, builds the scanner snapshot) then
+starts both servers. The file-backed surfaces work immediately:
+
+- <http://localhost:3000/scanner> — ranked screen (cross-sectional + absolute grade)
+- <http://localhost:3000/ipo/SPACEX> — IPO / private-company mode
+- <http://localhost:3000/reports> — generated scorecards
+
+Pages that need live market/portfolio data (market, portfolio, dashboard) show
+their honest empty states until you ingest real data. Demo data only — no
+holdings, no broker data, no secrets.
+
+### Try it with the sample portfolio (needs the database)
+
+For the portfolio/risk surfaces, import the fake demo holdings (requires step 4,
+the database):
 
 ```bash
 cd backend && .venv/bin/python ../scripts/import_portfolio.py ../examples/sample_portfolio.csv
@@ -279,7 +303,6 @@ This is the core contract:
 - Outcome-anchored calibration — fit the absolute A–E bands to *forward
   outcomes* (cross-sectional + pinned-distribution absolute calibration already
   shipped; the remaining step is anchoring the bands to realized results)
-- Public demo mode (one-command sample dataset)
 - Richer report exports
 - Optional compliance / risk layer (later)
 

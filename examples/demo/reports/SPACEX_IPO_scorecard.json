@@ -1,0 +1,479 @@
+{
+  "ticker": "SPACEX",
+  "mode": "ipo_private_company",
+  "classification": "valuation_risk_watchlist",
+  "confidence": 0.85,
+  "thesis": "SPACEX: official S-1 verified on SEC EDGAR. At the expected IPO price the implied market cap is ~$1.77T on ~$18674M FY revenue (EV/Revenue ~94x), with negative operating income and a founder-controlled dual-class structure. The price embeds years of flawless execution. Research-only: a valuation-risk watch item, not a recommendation.",
+  "verification": {
+    "query": "Space Exploration Technologies Corp",
+    "status": "official_filing_found",
+    "filing_found": true,
+    "registrant_name": "SPACE EXPLORATION TECHNOLOGIES CORP",
+    "cik": "0001181412",
+    "proposed_ticker": "SPCX",
+    "filings": [
+      {
+        "form": "S-1/A",
+        "filing_date": "2026-06-03",
+        "accession": "0001628280-26-040364",
+        "document": "spaceexplorationtechnologib.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm"
+      },
+      {
+        "form": "S-1/A",
+        "filing_date": "2026-06-01",
+        "accession": "0001628280-26-039276",
+        "document": "spaceexplorationtechnologi.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026039276/spaceexplorationtechnologi.htm"
+      },
+      {
+        "form": "S-1",
+        "filing_date": "2026-05-20",
+        "accession": "0001628280-26-036936",
+        "document": "spaceexplorationtechnologi.htm",
+        "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026036936/spaceexplorationtechnologi.htm"
+      }
+    ],
+    "sources_checked": [
+      "SEC EDGAR full-text search (efts.sec.gov)",
+      "SEC EDGAR submissions API (data.sec.gov)"
+    ],
+    "notes": [
+      "Official registration filing(s) found for SPACE EXPLORATION TECHNOLOGIES CORP (CIK 0001181412): S-1, S-1/A."
+    ]
+  },
+  "facts": {
+    "ticker": "SPACEX",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+    "facts": {
+      "ipo_price_per_share": {
+        "key": "ipo_price_per_share",
+        "value": 135.0,
+        "unit": "per_share",
+        "period": null,
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "tock. We expect the initial public offering price to be $135.00 per share. We have applied to list our Class A common stock on The Nasdaq Stock Market LLC (\"Nasdaq\") and Nasdaq Tex",
+          "confidence": 0.95
+        }
+      },
+      "shares_offered": {
+        "key": "shares_offered",
+        "value": 555555555.0,
+        "unit": "shares",
+        "period": null,
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "corporation. We are offering 555,555,555 shares of our Class A common stock. Currently, no public market exists for our Class A common stock. We expect the initial public offering",
+          "confidence": 0.92
+        }
+      },
+      "class_a_shares_outstanding": {
+        "key": "class_a_shares_outstanding",
+        "value": 6824641355.0,
+        "unit": "shares",
+        "period": "as_of_period_end",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "ffering is based on 6,824,641,355 shares of Class A common stock and 5,695,668,265 shares of Class B common stock outstanding as of March 31, 2026, after giving effect to (i) the C",
+          "confidence": 0.9
+        }
+      },
+      "class_b_shares_outstanding": {
+        "key": "class_b_shares_outstanding",
+        "value": 5695668265.0,
+        "unit": "shares",
+        "period": "as_of_period_end",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "ffering is based on 6,824,641,355 shares of Class A common stock and 5,695,668,265 shares of Class B common stock outstanding as of March 31, 2026, after giving effect to (i) the C",
+          "confidence": 0.9
+        }
+      },
+      "total_shares_pre_offering": {
+        "key": "total_shares_pre_offering",
+        "value": 12520309620.0,
+        "unit": "shares",
+        "period": "as_of_period_end",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "ffering is based on 6,824,641,355 shares of Class A common stock and 5,695,668,265 shares of Class B common stock outstanding as of March 31, 2026, after giving effect to (i) the C",
+          "confidence": 0.88
+        }
+      },
+      "cash_and_equivalents": {
+        "key": "cash_and_equivalents",
+        "value": 15852.0,
+        "unit": "usd_millions",
+        "period": "as_of_period_end",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "erations, our total cash and cash equivalents of $15,852 million as of March 31, 2026, short-term marketable securities of $7,823 million as of March 31, 2026, and borrowings under",
+          "confidence": 0.9
+        }
+      },
+      "revenue_q1_2026": {
+        "key": "revenue_q1_2026",
+        "value": 4694.0,
+        "unit": "usd_millions",
+        "period": "Q1-2026",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $4,694 million, loss from operations of $(1,943) million and Adjusted EBITDA of $1,127 million. In 2025, we generated revenue on a consolidated basis o",
+          "confidence": 0.9
+        }
+      },
+      "loss_from_operations_q1_2026": {
+        "key": "loss_from_operations_q1_2026",
+        "value": -1943.0,
+        "unit": "usd_millions",
+        "period": "Q1-2026",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $4,694 million, loss from operations of $(1,943) million and Adjusted EBITDA of $1,127 million. In 2025, we generated revenue on a consolidated basis o",
+          "confidence": 0.9
+        }
+      },
+      "adjusted_ebitda_q1_2026": {
+        "key": "adjusted_ebitda_q1_2026",
+        "value": 1127.0,
+        "unit": "usd_millions",
+        "period": "Q1-2026",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $4,694 million, loss from operations of $(1,943) million and Adjusted EBITDA of $1,127 million. In 2025, we generated revenue on a consolidated basis o",
+          "confidence": 0.85
+        }
+      },
+      "revenue_fy2025": {
+        "key": "revenue_fy2025",
+        "value": 18674.0,
+        "unit": "usd_millions",
+        "period": "FY2025",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $18,674 million, loss from operations of $(2,589) million and Adjusted EBITDA of $6,584 million. Our Space and Connectivity segments contributed the su",
+          "confidence": 0.9
+        }
+      },
+      "loss_from_operations_fy2025": {
+        "key": "loss_from_operations_fy2025",
+        "value": -2589.0,
+        "unit": "usd_millions",
+        "period": "FY2025",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $18,674 million, loss from operations of $(2,589) million and Adjusted EBITDA of $6,584 million. Our Space and Connectivity segments contributed the su",
+          "confidence": 0.9
+        }
+      },
+      "adjusted_ebitda_fy2025": {
+        "key": "adjusted_ebitda_fy2025",
+        "value": 6584.0,
+        "unit": "usd_millions",
+        "period": "FY2025",
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "e on a consolidated basis of $18,674 million, loss from operations of $(2,589) million and Adjusted EBITDA of $6,584 million. Our Space and Connectivity segments contributed the su",
+          "confidence": 0.85
+        }
+      },
+      "class_b_votes_per_share": {
+        "key": "class_b_votes_per_share",
+        "value": 10.0,
+        "unit": "ratio",
+        "period": null,
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "Class B common stock will have ten votes per share",
+          "confidence": 0.9
+        }
+      },
+      "class_a_votes_per_share": {
+        "key": "class_a_votes_per_share",
+        "value": 1.0,
+        "unit": "ratio",
+        "period": null,
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": null,
+          "confidence": 0.9
+        }
+      },
+      "lockup_days": {
+        "key": "lockup_days",
+        "value": 366.0,
+        "unit": "days",
+        "period": null,
+        "provenance": {
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026040364/spaceexplorationtechnologib.htm",
+          "section": null,
+          "snippet": "during a period of 366 days after the date of this prospectus, all of the shares owned by him are subject to",
+          "confidence": 0.85
+        }
+      }
+    },
+    "missing": []
+  },
+  "valuation": {
+    "can_value": true,
+    "method": "scenario",
+    "fcf_positive": null,
+    "metrics": {
+      "shares_post_offering": 13075865175.0,
+      "implied_market_cap_musd": 1765241.7986,
+      "enterprise_value_musd": 1749389.7986,
+      "price_to_sales": 94.5294,
+      "ev_to_revenue": 93.6805,
+      "operating_margin": -0.1386,
+      "offering_dilution_pct": 0.0425,
+      "net_margin": null
+    },
+    "scenarios": [
+      {
+        "scenario": "bear",
+        "horizon_years": 5,
+        "revenue_cagr": 0.15,
+        "target_fcf_margin": 0.08,
+        "terminal_fcf_multiple": 18.0,
+        "discount_rate": 0.12,
+        "projected_revenue_musd": 37560.0,
+        "projected_fcf_musd": 3005.0,
+        "pv_enterprise_value_musd": 30690.0,
+        "implied_equity_value_musd": 46542.0,
+        "gap_vs_ipo_ev_pct": -0.982,
+        "label": "speculative"
+      },
+      {
+        "scenario": "base",
+        "horizon_years": 5,
+        "revenue_cagr": 0.3,
+        "target_fcf_margin": 0.15,
+        "terminal_fcf_multiple": 25.0,
+        "discount_rate": 0.12,
+        "projected_revenue_musd": 69335.0,
+        "projected_fcf_musd": 10400.0,
+        "pv_enterprise_value_musd": 147535.0,
+        "implied_equity_value_musd": 163387.0,
+        "gap_vs_ipo_ev_pct": -0.916,
+        "label": "speculative"
+      },
+      {
+        "scenario": "bull",
+        "horizon_years": 5,
+        "revenue_cagr": 0.45,
+        "target_fcf_margin": 0.22,
+        "terminal_fcf_multiple": 32.0,
+        "discount_rate": 0.12,
+        "projected_revenue_musd": 119695.0,
+        "projected_fcf_musd": 26333.0,
+        "pv_enterprise_value_musd": 478145.0,
+        "implied_equity_value_musd": 493997.0,
+        "gap_vs_ipo_ev_pct": -0.727,
+        "label": "speculative"
+      }
+    ],
+    "comps": [
+      {
+        "ticker": "TSLA",
+        "quality": "weak",
+        "ev_sales_ref": 9.0,
+        "note": "Elon/governance & hype reference, not a business comp.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "LMT",
+        "quality": "partial",
+        "ev_sales_ref": 2.0,
+        "note": "Defense/aerospace prime.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "NOC",
+        "quality": "partial",
+        "ev_sales_ref": 2.2,
+        "note": "Defense/aerospace prime.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "RTX",
+        "quality": "partial",
+        "ev_sales_ref": 2.5,
+        "note": "Defense/aerospace prime.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "RKLB",
+        "quality": "strong",
+        "ev_sales_ref": 30.0,
+        "note": "Closest pure-play launch/space.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "ASTS",
+        "quality": "partial",
+        "ev_sales_ref": 120.0,
+        "note": "Sat-to-phone, pre-revenue-ish.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "IRDM",
+        "quality": "partial",
+        "ev_sales_ref": 5.0,
+        "note": "Satellite connectivity.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "NVDA",
+        "quality": "weak",
+        "ev_sales_ref": 25.0,
+        "note": "Mega-cap growth valuation context only.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "AMZN",
+        "quality": "weak",
+        "ev_sales_ref": 3.5,
+        "note": "Infra/capex-heavy context only.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      },
+      {
+        "ticker": "GOOG",
+        "quality": "weak",
+        "ev_sales_ref": 6.5,
+        "note": "Mega-cap context only.",
+        "ev_sales_ref_quality": "approximate_reference_verify_live"
+      }
+    ],
+    "missing": [
+      "net_income_or_loss",
+      "operating_cash_flow_fy2025",
+      "capex_fy2025"
+    ],
+    "notes": [
+      "EV = market cap - cash. Debt not separately parsed; EV is a partial (net-cash-only) approximation.",
+      "Free cash flow cannot be computed (OCF and/or total capex not parsed). Operating income is negative; treating FCF as unconfirmed.",
+      "EV/Sales 94x is ~3.1x the closest pure-play comp (RKLB ~30x).",
+      "FCF negative/unconfirmed -> SPECULATIVE path-to-FCF scenario model used instead of a normal reverse DCF."
+    ]
+  },
+  "risks": [
+    {
+      "category": "valuation",
+      "level": "high",
+      "rationale": "EV/Revenue ~94x prices in years of compounding growth; little margin for error.",
+      "evidence": [
+        "EV/Revenue ~93.7x",
+        "vs aerospace primes ~2-3x"
+      ]
+    },
+    {
+      "category": "profitability",
+      "level": "high",
+      "rationale": "Negative operating margin (-14%); FCF unconfirmed. Capex-intensive.",
+      "evidence": [
+        "loss from operations (FY)",
+        "heavy capex (launch/Starlink/Starship)"
+      ]
+    },
+    {
+      "category": "governance",
+      "level": "high",
+      "rationale": "Dual-class super-voting structure (Class B = 10 votes) concentrates control with the founder; public Class A holders have limited say.",
+      "evidence": [
+        "Class B 10 votes/share",
+        "founder controls majority of votes",
+        "related-party transactions to verify in filing"
+      ]
+    },
+    {
+      "category": "lockup_supply",
+      "level": "elevated",
+      "rationale": "366-day lock-up; expiry can release large insider supply. Secondary/over-allotment supply risk.",
+      "evidence": [
+        "366-day lock-up",
+        "insider + secondary supply on expiry"
+      ]
+    },
+    {
+      "category": "business_concentration",
+      "level": "elevated",
+      "rationale": "Revenue concentrated in Starlink connectivity + government/NASA/defense launch contracts; customer and program concentration to verify in filing.",
+      "evidence": [
+        "Starlink dependence",
+        "government/NASA/defense contracts",
+        "launch-cadence dependence"
+      ]
+    },
+    {
+      "category": "execution",
+      "level": "elevated",
+      "rationale": "Growth thesis leans on Starship maturation, Starlink scaling, and heavy capex execution against competitive and regulatory pressure.",
+      "evidence": [
+        "Starship development",
+        "satellite deployment cadence",
+        "capex execution"
+      ]
+    },
+    {
+      "category": "ipo_hype",
+      "level": "elevated",
+      "rationale": "High-profile, high-retail-interest listing. First-day demand can detach price from fundamentals; post-IPO drawdown risk after lock-ups. Asterion makes no first-day prediction.",
+      "evidence": [
+        "high retail interest",
+        "index-inclusion flows later",
+        "history of high-hype IPO volatility"
+      ]
+    }
+  ],
+  "key_risks": [
+    "valuation: high",
+    "profitability: high",
+    "governance: high",
+    "lockup_supply: elevated",
+    "business_concentration: elevated",
+    "execution: elevated",
+    "ipo_hype: elevated"
+  ],
+  "missing_data": [
+    "capex_fy2025",
+    "net_income_or_loss",
+    "operating_cash_flow_fy2025"
+  ],
+  "must_verify": [
+    "GAAP net income/loss and segment revenue (Starlink vs launch vs government)",
+    "Operating cash flow and total capex -> true free cash flow sign",
+    "Total debt and full capitalization table",
+    "Final IPO price, shares sold, over-allotment, and resulting float",
+    "Customer concentration and related-party transactions",
+    "Exact lock-up schedule and timed-release provisions"
+  ],
+  "would_change_conclusion": [
+    "A confirmed positive and growing FCF would shift from scenario model to a reverse DCF",
+    "A materially lower final price / valuation would reduce valuation risk",
+    "Disclosed segment economics could strengthen or weaken the concentration view",
+    "Removal/sunset of super-voting would lower governance risk"
+  ],
+  "monitoring_checklist": [
+    "Final pricing vs the $135 expectation and first-day trading range",
+    "First public earnings: revenue mix, margin trajectory, FCF",
+    "Lock-up expiry dates and insider selling",
+    "Starship / Starlink execution milestones",
+    "Index-inclusion timing and resulting flows"
+  ],
+  "disclaimer": "IPO / private company mode. Not a normal public ticker analysis. Research only \u2014 not investment advice and not a buy/sell recommendation. All figures are traceable to the cited filing; missing inputs are shown as missing."
+}

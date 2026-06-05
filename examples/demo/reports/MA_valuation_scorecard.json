@@ -1,0 +1,198 @@
+{
+  "classification": "risk_review_required",
+  "confidence": 0.6,
+  "reason": "Mixed signals, requires further risk review.",
+  "metrics": {
+    "fcf_margin": 0.5232838278796011,
+    "net_margin": 0.45646671342746487,
+    "operating_margin": 0.5762861760849013,
+    "debt_to_equity": 2.3589246477963033,
+    "current_ratio": 1.0349705649767156,
+    "pe_ratio": 3.943756478905927
+  },
+  "red_flags": [
+    "High debt to equity ratio: 2.3589246477963033"
+  ],
+  "missing_data": [
+    "gross_margin",
+    "valuation_percentile_pe",
+    "valuation_percentile_ev_revenue",
+    "valuation_percentile_p_fcf"
+  ],
+  "advanced_scores": {
+    "operating_leverage_convexity": {
+      "score": 75.64720659702056,
+      "confidence": 0.5,
+      "inputs_used": {
+        "revenue_growth_yoy": 0.16416373770724602,
+        "operating_leverage_ratio": 1.2959346474438842,
+        "operating_margin_trend": 0.024772932391957103,
+        "fcf_margin_trend": 0.039720397560763177
+      },
+      "missing_inputs": [
+        "gross_margin"
+      ],
+      "explanation": "Operating leverage from GM\u00d7growth + op-leverage 1.30\u00d7 (convex), op-margin rising. Score: 75.6",
+      "failure_modes": []
+    },
+    "reflexivity_risk": {
+      "score": 68.299703168392,
+      "confidence": 1.0,
+      "inputs_used": {
+        "current_ratio": 1.0349705649767156,
+        "debt_to_equity": 2.3589246477963033,
+        "sbc_to_revenue": 0.01820621512000244,
+        "volatility": 0.24205805966222102,
+        "max_drawdown": -0.20913853873134192
+      },
+      "missing_inputs": [],
+      "explanation": "Financial reflexivity from leverage/liquidity (MVP \u2014 not true reflexivity). Risk: 68.3",
+      "failure_modes": []
+    },
+    "expectations_gap": {
+      "score": 0.0,
+      "confidence": 1.0,
+      "inputs_used": {
+        "implied_growth": -0.1845192349050482,
+        "historical_growth_ttm": 0.15698397007209075,
+        "pe_ratio": 3.943756478905927,
+        "fcf_margin_trend": 0.039720397560763177
+      },
+      "missing_inputs": [],
+      "explanation": "Implied growth -18.5% vs historical +15.7%. Score: 0.0",
+      "failure_modes": []
+    },
+    "thesis_fragility": {
+      "score": 27.502439202763508,
+      "confidence": 1.0,
+      "inputs_used": {
+        "dcf_sensitivity_impact": 0.39855119295562413,
+        "pe_ratio": 3.943756478905927,
+        "implied_growth": -0.1845192349050482,
+        "historical_growth_ttm": 0.15698397007209075,
+        "fcf_margin": 0.5232838278796011,
+        "sbc_to_revenue": 0.01820621512000244,
+        "debt_to_equity": 2.3589246477963033,
+        "volatility": 0.24205805966222102,
+        "max_drawdown": -0.20913853873134192
+      },
+      "missing_inputs": [],
+      "explanation": "Fragility blend of sensitivity 0.40, leverage 1.00, price_risk 0.42. Score: 27.5",
+      "failure_modes": []
+    },
+    "misunderstood_change": {
+      "score": 28.42579390434534,
+      "confidence": 0.5,
+      "inputs_used": {
+        "capex_growth": 0.03425793904345342
+      },
+      "missing_inputs": [
+        "sentiment_shift"
+      ],
+      "explanation": "Misunderstood change: capex +3.4% (sentiment feed missing \u2014 weak). Score: 28.4",
+      "failure_modes": []
+    }
+  },
+  "thesis_invalidation_triggers": [
+    "Debt covenant breach or liquidity crisis"
+  ],
+  "monitor_next": [
+    "General execution"
+  ],
+  "m4_memo_status": "Unavailable",
+  "hallucination_audit": "PASSED",
+  "ticker": "MA",
+  "real_inputs": {
+    "operating_margin": 0.5762861760849013,
+    "net_margin": 0.45646671342746487,
+    "fcf_margin": 0.5232838278796011,
+    "current_ratio": 1.0349705649767156,
+    "debt_to_equity": 2.3589246477963033,
+    "sbc_to_revenue": 0.01820621512000244,
+    "revenue_growth_yoy": 0.16416373770724602,
+    "operating_income_growth_yoy": 0.21274547554871015,
+    "operating_leverage_ratio": 1.2959346474438842,
+    "revenue_cagr": 0.1382198495222513,
+    "fcf_growth": 0.16856832298677493,
+    "capex_growth": 0.03425793904345342,
+    "operating_margin_trend": 0.024772932391957103,
+    "fcf_margin_trend": 0.039720397560763177,
+    "historical_growth_ttm": 0.15698397007209075,
+    "operating_cash_flow": 17648000000.0,
+    "ocf_concept": "NetCashProvidedByUsedInOperatingActivities",
+    "capex": 489000000.0,
+    "capex_concept": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "fcf": 17159000000.0,
+    "fcf_confidence": 1.0,
+    "pe_ratio": 3.943756478905927,
+    "enterprise_value": 66715146976.263916,
+    "wacc": 0.08347288008718289,
+    "wacc_confidence": 0.85,
+    "wacc_assumptions": {
+      "wacc": 0.08347288008718289,
+      "method": "capm_phase_a",
+      "risk_free_rate": 0.045,
+      "equity_risk_premium": 0.05,
+      "beta": 1.1,
+      "beta_source": "default",
+      "cost_of_equity": 0.1,
+      "cost_of_debt": 0.03725823242562051,
+      "cost_of_debt_source": "interest_expense/total_debt",
+      "tax_rate": 0.19431585746581978,
+      "tax_rate_source": "income_tax/pretax",
+      "weight_equity": 0.7638363208350725,
+      "weight_debt": 0.23616367916492753,
+      "confidence": 0.85,
+      "missing_flags": [],
+      "risk_free_source": "fallback"
+    },
+    "implied_growth": -0.1845192349050482,
+    "dcf_sensitivity_impact": 0.39855119295562413,
+    "volatility": 0.24205805966222102,
+    "max_drawdown": -0.20913853873134192
+  },
+  "market_cap": 59030146976.263916,
+  "price_used": 481.760009765625,
+  "input_missing_flags": [
+    "gross_margin",
+    "valuation_percentile_pe",
+    "valuation_percentile_ev_revenue",
+    "valuation_percentile_p_fcf"
+  ],
+  "wacc": 0.08347288008718289,
+  "wacc_assumptions": {
+    "wacc": 0.08347288008718289,
+    "method": "capm_phase_a",
+    "risk_free_rate": 0.045,
+    "equity_risk_premium": 0.05,
+    "beta": 1.1,
+    "beta_source": "default",
+    "cost_of_equity": 0.1,
+    "cost_of_debt": 0.03725823242562051,
+    "cost_of_debt_source": "interest_expense/total_debt",
+    "tax_rate": 0.19431585746581978,
+    "tax_rate_source": "income_tax/pretax",
+    "weight_equity": 0.7638363208350725,
+    "weight_debt": 0.23616367916492753,
+    "confidence": 0.85,
+    "missing_flags": [],
+    "risk_free_source": "fallback"
+  },
+  "fcf": {
+    "operating_cash_flow": 17648000000.0,
+    "capex": 489000000.0,
+    "fcf": 17159000000.0,
+    "fcf_margin": 0.5232838278796011,
+    "capex_concept": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "ocf_concept": "NetCashProvidedByUsedInOperatingActivities",
+    "confidence": 1.0
+  },
+  "wacc_source": {
+    "risk_free_source": "fallback",
+    "beta_source": "default",
+    "cost_of_debt_source": "interest_expense/total_debt",
+    "tax_rate_source": "income_tax/pretax",
+    "method": "capm_phase_a"
+  },
+  "valuation_percentiles": null
+}

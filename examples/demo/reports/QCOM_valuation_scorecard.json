@@ -1,0 +1,248 @@
+{
+  "classification": "wait_for_better_price",
+  "confidence": 0.75,
+  "reason": "Business is solid but current valuation multiples and expectations gap suggest limited margin of safety.",
+  "metrics": {
+    "fcf_margin": 0.28949507722879597,
+    "net_margin": 0.1251241983560654,
+    "operating_margin": 0.27899467076144885,
+    "debt_to_equity": 0.6984344053569744,
+    "current_ratio": 2.8164916885389326,
+    "pe_ratio": 46.14127192198639
+  },
+  "red_flags": [],
+  "missing_data": [
+    "gross_margin"
+  ],
+  "advanced_scores": {
+    "operating_leverage_convexity": {
+      "score": 79.73442120169392,
+      "confidence": 0.5,
+      "inputs_used": {
+        "revenue_growth_yoy": 0.13659463066577682,
+        "operating_leverage_ratio": 1.660312644560338,
+        "operating_margin_trend": 0.06157423525056108,
+        "fcf_margin_trend": 0.014536953275697151
+      },
+      "missing_inputs": [
+        "gross_margin"
+      ],
+      "explanation": "Operating leverage from GM\u00d7growth + op-leverage 1.66\u00d7 (convex), op-margin rising. Score: 79.7",
+      "failure_modes": []
+    },
+    "reflexivity_risk": {
+      "score": 25.617007028858104,
+      "confidence": 1.0,
+      "inputs_used": {
+        "current_ratio": 2.8164916885389326,
+        "debt_to_equity": 0.6984344053569744,
+        "sbc_to_revenue": 0.06284436816909042,
+        "shares_change": -0.037735849056603765,
+        "volatility": 0.4845007847232156,
+        "max_drawdown": -0.3312840621682296
+      },
+      "missing_inputs": [],
+      "explanation": "Financial reflexivity from leverage/liquidity + SBC 6.3% of revenue, vol 48%, drawdown -33% (MVP \u2014 not true reflexivity). Risk: 25.6",
+      "failure_modes": []
+    },
+    "expectations_gap": {
+      "score": 42.502976439030284,
+      "confidence": 1.0,
+      "inputs_used": {
+        "implied_growth": 0.07443655584706707,
+        "historical_growth_ttm": 0.1297941763973296,
+        "pe_ratio": 46.14127192198639,
+        "fcf_margin_trend": 0.014536953275697151
+      },
+      "missing_inputs": [],
+      "explanation": "Implied growth +7.4% vs historical +13.0% + PE 46. Score: 42.5",
+      "failure_modes": []
+    },
+    "thesis_fragility": {
+      "score": 40.91609278777684,
+      "confidence": 1.0,
+      "inputs_used": {
+        "dcf_sensitivity_impact": 0.5466144413732558,
+        "pe_ratio": 46.14127192198639,
+        "implied_growth": 0.07443655584706707,
+        "historical_growth_ttm": 0.1297941763973296,
+        "fcf_margin": 0.28949507722879597,
+        "sbc_to_revenue": 0.06284436816909042,
+        "debt_to_equity": 0.6984344053569744,
+        "volatility": 0.4845007847232156,
+        "max_drawdown": -0.3312840621682296
+      },
+      "missing_inputs": [],
+      "explanation": "Fragility blend of sensitivity 0.55, valuation 0.77, price_risk 0.66. Score: 40.9",
+      "failure_modes": []
+    },
+    "misunderstood_change": {
+      "score": 15.668018921626455,
+      "confidence": 0.5,
+      "inputs_used": {
+        "capex_growth": -0.09331981078373541
+      },
+      "missing_inputs": [
+        "sentiment_shift"
+      ],
+      "explanation": "Misunderstood change: capex -9.3% (sentiment feed missing \u2014 weak). Score: 15.7",
+      "failure_modes": []
+    }
+  },
+  "thesis_invalidation_triggers": [
+    "Multiple compression"
+  ],
+  "monitor_next": [
+    "Price action",
+    "Entry multiples"
+  ],
+  "m4_memo_status": "Unavailable",
+  "hallucination_audit": "PASSED",
+  "ticker": "QCOM",
+  "real_inputs": {
+    "operating_margin": 0.27899467076144885,
+    "net_margin": 0.1251241983560654,
+    "fcf_margin": 0.28949507722879597,
+    "current_ratio": 2.8164916885389326,
+    "debt_to_equity": 0.6984344053569744,
+    "sbc_to_revenue": 0.06284436816909042,
+    "revenue_growth_yoy": 0.13659463066577682,
+    "operating_income_growth_yoy": 0.22678979247343856,
+    "operating_leverage_ratio": 1.660312644560338,
+    "revenue_cagr": 0.11188694298521917,
+    "fcf_growth": 0.1409009555409928,
+    "capex_growth": -0.09331981078373541,
+    "operating_margin_trend": 0.06157423525056108,
+    "fcf_margin_trend": 0.014536953275697151,
+    "shares_change": -0.037735849056603765,
+    "historical_growth_ttm": 0.1297941763973296,
+    "operating_cash_flow": 14012000000.0,
+    "ocf_concept": "NetCashProvidedByUsedInOperatingActivities",
+    "capex": 1192000000.0,
+    "capex_concept": "PaymentsToAcquireProductiveAssets",
+    "fcf": 12820000000.0,
+    "fcf_confidence": 1.0,
+    "pe_ratio": 46.14127192198639,
+    "enterprise_value": 264959787719.72656,
+    "wacc": 0.09646354351257043,
+    "wacc_confidence": 0.7999999999999999,
+    "wacc_assumptions": {
+      "wacc": 0.09646354351257043,
+      "method": "capm_phase_a",
+      "risk_free_rate": 0.045,
+      "equity_risk_premium": 0.05,
+      "beta": 1.1,
+      "beta_source": "default",
+      "cost_of_equity": 0.1,
+      "cost_of_debt": 0.044831544122611575,
+      "cost_of_debt_source": "interest_expense/total_debt",
+      "tax_rate": 0.21,
+      "tax_rate_source": "fallback",
+      "weight_equity": 0.9452417493933141,
+      "weight_debt": 0.05475825060668593,
+      "confidence": 0.7999999999999999,
+      "missing_flags": [
+        "tax_rate_out_of_band"
+      ],
+      "risk_free_source": "fallback"
+    },
+    "implied_growth": 0.07443655584706707,
+    "dcf_sensitivity_impact": 0.5466144413732558,
+    "valuation_percentiles": {
+      "pe": {
+        "current": 46.14127192198639,
+        "percentile": 1.0,
+        "n_years": 3,
+        "min": 15.716222952952426,
+        "median": 17.493962120337496,
+        "max": 34.5314388967038
+      },
+      "ev_revenue": {
+        "current": 5.983194556041156,
+        "percentile": 1.0,
+        "n_years": 3,
+        "min": 3.341533344381685,
+        "median": 4.530523505704899,
+        "max": 4.692899846631664
+      },
+      "p_fcf": {
+        "current": 19.942963160665098,
+        "percentile": 1.0,
+        "n_years": 3,
+        "min": 11.54022991123484,
+        "median": 14.925015828910745,
+        "max": 15.896762281557468
+      }
+    },
+    "volatility": 0.4845007847232156,
+    "max_drawdown": -0.3312840621682296
+  },
+  "market_cap": 255668787719.72656,
+  "price_used": 242.57000732421875,
+  "input_missing_flags": [
+    "gross_margin"
+  ],
+  "wacc": 0.09646354351257043,
+  "wacc_assumptions": {
+    "wacc": 0.09646354351257043,
+    "method": "capm_phase_a",
+    "risk_free_rate": 0.045,
+    "equity_risk_premium": 0.05,
+    "beta": 1.1,
+    "beta_source": "default",
+    "cost_of_equity": 0.1,
+    "cost_of_debt": 0.044831544122611575,
+    "cost_of_debt_source": "interest_expense/total_debt",
+    "tax_rate": 0.21,
+    "tax_rate_source": "fallback",
+    "weight_equity": 0.9452417493933141,
+    "weight_debt": 0.05475825060668593,
+    "confidence": 0.7999999999999999,
+    "missing_flags": [
+      "tax_rate_out_of_band"
+    ],
+    "risk_free_source": "fallback"
+  },
+  "fcf": {
+    "operating_cash_flow": 14012000000.0,
+    "capex": 1192000000.0,
+    "fcf": 12820000000.0,
+    "fcf_margin": 0.28949507722879597,
+    "capex_concept": "PaymentsToAcquireProductiveAssets",
+    "ocf_concept": "NetCashProvidedByUsedInOperatingActivities",
+    "confidence": 1.0
+  },
+  "wacc_source": {
+    "risk_free_source": "fallback",
+    "beta_source": "default",
+    "cost_of_debt_source": "interest_expense/total_debt",
+    "tax_rate_source": "fallback",
+    "method": "capm_phase_a"
+  },
+  "valuation_percentiles": {
+    "pe": {
+      "current": 46.14127192198639,
+      "percentile": 1.0,
+      "n_years": 3,
+      "min": 15.716222952952426,
+      "median": 17.493962120337496,
+      "max": 34.5314388967038
+    },
+    "ev_revenue": {
+      "current": 5.983194556041156,
+      "percentile": 1.0,
+      "n_years": 3,
+      "min": 3.341533344381685,
+      "median": 4.530523505704899,
+      "max": 4.692899846631664
+    },
+    "p_fcf": {
+      "current": 19.942963160665098,
+      "percentile": 1.0,
+      "n_years": 3,
+      "min": 11.54022991123484,
+      "median": 14.925015828910745,
+      "max": 15.896762281557468
+    }
+  }
+}

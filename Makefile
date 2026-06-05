@@ -1,6 +1,6 @@
 # Asterion local developer commands (M11.5).
 # Thin wrappers over scripts/*.sh — no product logic here.
-.PHONY: start stop health logs restart help scan calibrate expand ipo
+.PHONY: start stop health logs restart help scan calibrate expand ipo demo
 
 help:
 	@echo "Asterion — local dev commands:"
@@ -13,6 +13,7 @@ help:
 	@echo "  make calibrate   Pin the absolute-calibration reference distribution"
 	@echo "  make expand ARGS='--starter'   Expand the scannable universe (SEC ingest + score)"
 	@echo "  make ipo      Analyze an IPO candidate (SpaceX): verify SEC filing + scorecard"
+	@echo "  make demo     Public demo: seed sample data (no DB/keys), then start the app"
 
 scan:
 	@cd backend && .venv/bin/python ../scripts/run_scanner.py
@@ -25,6 +26,10 @@ expand:
 
 ipo:
 	@cd backend && .venv/bin/python ../scripts/analyze_ipo_candidate.py SPACEX
+
+demo:
+	@cd backend && .venv/bin/python ../scripts/load_demo.py
+	@bash scripts/start_asterion.sh
 
 start:
 	@bash scripts/start_asterion.sh
