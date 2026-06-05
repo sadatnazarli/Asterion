@@ -1,0 +1,39 @@
+{
+  "_comment": "Retrieval index for investor lenses. styles map a strategy tag -> lens slugs. Slugs are filenames (without .json) under knowledge/investor_lenses/. Populated in Phase 3 (M3). 'planned' lists the 20 lenses to author from the spec; original summaries only, no copyrighted text.",
+  "version": "0",
+  "styles": {
+    "value": [],
+    "quality_compounder": [],
+    "macro": [],
+    "growth": [],
+    "forensic": [],
+    "contrarian": [],
+    "quant": [],
+    "activist": [],
+    "short_seller": [],
+    "risk_manager": []
+  },
+  "lenses": [],
+  "planned": [
+    "warren-buffett-charlie-munger",
+    "benjamin-graham",
+    "peter-lynch",
+    "philip-fisher",
+    "howard-marks",
+    "ray-dalio",
+    "stanley-druckenmiller",
+    "george-soros",
+    "terry-smith",
+    "nick-sleep",
+    "li-lu",
+    "bill-ackman",
+    "michael-burry",
+    "joel-greenblatt",
+    "seth-klarman",
+    "monish-pabrai",
+    "charlie-munger-mental-models",
+    "john-templeton",
+    "jim-simons-quant-principles",
+    "aladdin-style-risk-principles"
+  ]
+}

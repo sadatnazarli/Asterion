@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+:root {
+  /* M8.10 token mirror (for non-tailwind consumers: charts, inline styles) */
+  --color-background: #0a0c10;
+  --color-panel: #11151c;
+  --color-panel2: #171c25;
+  --color-panel3: #1e242f;
+  --color-border: #1b212b;
+  --color-border-strong: #2a323f;
+  --color-grid: #161b22;
+  --color-foreground: #e6e9ef;
+  --color-muted-foreground: #98a2b3;
+  --color-faint: #5b6573;
+  --color-up: #3fb950;
+  --color-down: #e5534b;
+  --color-warn: #d6a121;
+  --color-accent: #4c8dff;
+  --color-teal: #2bb6a3;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* refined Inter: contextual alternates + tighter spacing on UI text */
+    font-feature-settings: 'cv01', 'cv03', 'cv04', 'ss01';
+  }
+  ::selection {
+    background-color: rgba(76, 141, 255, 0.28);
+  }
+  /* tabular numerics everywhere money/scores live */
+  .num {
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum', 'zero';
+    letter-spacing: -0.01em;
+  }
+  /* small calm section label */
+  .label {
+    font-size: 0.6875rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted-foreground);
+    font-weight: 600;
+  }
+}
+
+/* slim, low-contrast terminal scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #232a35;
+  border: 2px solid var(--color-background);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #303a47;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #232a35 transparent;
+}
+
+/* hairline helpers — separation without a hard cage */
+.hairline {
+  border-color: rgba(255, 255, 255, 0.055);
+}
+.divide-hairline > * + * {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* subtle grid texture for empty terminal panels (chart loading, etc.) */
+.terminal-grid {
+  background-image:
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  opacity: 0.5;
+}
+
+/* soft accent stripe for the primary insight module */
+.accent-stripe {
+  position: relative;
+}
+.accent-stripe::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-accent), rgba(76, 141, 255, 0.15));
+}

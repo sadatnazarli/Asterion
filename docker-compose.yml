@@ -1,0 +1,75 @@
+# ASTERION local dev stack. Ollama runs natively on the host (Metal/GPU), NOT here
+# — the backend reaches it via ASTERION_OLLAMA_BASE_URL (host.docker.internal:11434).
+services:
+  postgres:
+    # TimescaleDB image; pgvector added via migration (CREATE EXTENSION vector).
+    # timescaledb-ha bundles pgvector. If using plain timescaledb, ensure pgvector installed.
+    image: timescale/timescaledb-ha:pg16
+    container_name: asterion-postgres
+    environment:
+      POSTGRES_DB: ${ASTERION_DB_NAME:-asterion}
+      POSTGRES_USER: ${ASTERION_DB_USER:-asterion}
+      POSTGRES_PASSWORD: ${ASTERION_DB_PASSWORD:-change_me}
+    ports:
+      - "5432:5432"
+    volumes:
+      - asterion_pgdata:/home/postgres/pgdata/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${ASTERION_DB_USER:-asterion}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: asterion-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - asterion_redisdata:/data
+
+  backend:
+    build: ./backend
+    container_name: asterion-backend
+    env_file: .env
+    environment:
+      ASTERION_DB_HOST: postgres
+      ASTERION_REDIS_URL: redis://redis:6379/0
+      ASTERION_OLLAMA_BASE_URL: http://host.docker.internal:11434
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  worker:
+    build: ./backend
+    container_name: asterion-worker
+    command: celery -A app.worker.celery_app worker -l info
+    env_file: .env
+    environment:
+      ASTERION_DB_HOST: postgres
+      ASTERION_REDIS_URL: redis://redis:6379/0
+      ASTERION_OLLAMA_BASE_URL: http://host.docker.internal:11434
+    depends_on:
+      - postgres
+      - redis
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build: ./frontend
+    container_name: asterion-frontend
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  asterion_pgdata:
+  asterion_redisdata:

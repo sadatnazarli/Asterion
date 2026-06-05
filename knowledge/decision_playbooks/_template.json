@@ -1,0 +1,41 @@
+{
+  "_comment": "Deterministic IF->THEN rules consumed by backend/app/decision/. Rules are config/code, never LLM output. Verdict classes come from MASTER_PLAN Final Verdict Taxonomy. Example rules below illustrate the schema (from the spec).",
+  "version": "0",
+  "verdict_classes": [
+    "strong investment candidate", "investment candidate", "starter position only",
+    "watchlist", "wait for better price", "trading setup only", "avoid",
+    "reduce", "exit - thesis broken", "insufficient data"
+  ],
+  "rules": [
+    {
+      "id": "quality-high-cheap",
+      "if": {"final_investment_score": ">80", "valuation_score": ">50", "balance_sheet_score": ">60", "risk_acceptable": true, "concentration_ok": true},
+      "then": {"verdict": "investment candidate or starter position only"}
+    },
+    {
+      "id": "great-company-bad-price",
+      "if": {"quality_high": true, "valuation_score": "low"},
+      "then": {"verdict": "wait for better price"}
+    },
+    {
+      "id": "dilution-balance-sheet-bad",
+      "if": {"dilution_risk_score": "terrible", "balance_sheet_weak": true, "cash_runway_poor": true},
+      "then": {"verdict": "avoid or trading setup only"}
+    },
+    {
+      "id": "momentum-without-quality",
+      "if": {"momentum_high": true, "catalyst_high": true, "fundamental_score_weak": true},
+      "then": {"verdict": "trading setup only", "note": "not a long-term investment"}
+    },
+    {
+      "id": "forensic-red-flags",
+      "if": {"accounting_red_flags_high": true, "beneish_m_dangerous": true, "unexplained_accruals": true},
+      "then": {"verdict": "avoid", "note": "forensic review required"}
+    }
+  ],
+  "every_decision_outputs": [
+    "action", "confidence", "time_horizon", "max_position_size",
+    "position_sizing_logic", "thesis_invalidation_conditions", "key_risks",
+    "monitoring_triggers", "missing_data"
+  ]
+}

@@ -1,0 +1,67 @@
+# ===========================================================================
+# Asterion .gitignore — hardened for public release.
+# Goal: never commit secrets, personal data, logs, caches, or private reports.
+# ===========================================================================
+
+# --- secrets / env (keep ONLY *.example) ---
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env.local
+frontend/.env*.local
+
+# --- private user data (ship examples/ instead) ---
+real_portfolio.csv
+my_portfolio.csv
+my_real_portfolio_report.json
+my_real_portfolio_report.md
+portfolio_coverage.json
+portfolio_coverage.md
+portfolio_report.json
+portfolio_report.md
+
+# --- generated reports & screenshots (may contain private holdings/values) ---
+# Root-anchored so examples/reports/ (sanitized demo) stays tracked.
+/reports/
+/screenshots/
+backend/reports/
+
+# --- local data store (raw filings, caches) ---
+data/cache/*
+data/raw_documents/*
+backend/data/
+!data/**/.gitkeep
+
+# --- local dev launcher logs ---
+logs/
+*.log
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- node / next ---
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# --- databases ---
+*.sqlite
+*.db
+
+# --- os / editor ---
+.DS_Store
+.idea/
+.vscode/

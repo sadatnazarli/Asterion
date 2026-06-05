@@ -1,0 +1,25 @@
+{
+  "sector_name": "",
+  "slug": "",
+  "business_model_basics": "",
+  "key_metrics": [],
+  "useless_or_dangerous_metrics": [],
+  "valuation_methods": [],
+  "important_catalysts": [],
+  "common_traps": [],
+  "red_flags": [],
+  "balance_sheet_focus": [],
+  "cash_flow_focus": [],
+  "competitive_dynamics": [],
+  "cyclicality": "",
+  "macro_sensitivities": [],
+  "best_investor_lenses": [],
+  "scoring_adjustments": [],
+  "data_sources": [],
+  "questions_to_ask": [],
+  "_meta": {
+    "note": "scoring_adjustments feed sector-relative normalization in backend/app/quant/scoring. Curated, not LLM-generated.",
+    "version": "0",
+    "planned": ["saas","semiconductors","big-tech","biotech","banks","fintech-payments","marketplaces","consumer-brands","energy","industrials","cybersecurity","reits","asset-managers","insurance","aerospace-defense","small-cap-growth","pre-revenue"]
+  }
+}

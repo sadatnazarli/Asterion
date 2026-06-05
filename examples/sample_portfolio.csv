@@ -1,0 +1,6 @@
+ticker,quantity,average_cost,current_price_optional,current_value_optional,asset_type,notes
+VOO,,,,500.00,ETF,core index
+MSFT,,,,300.00,Stock,mega-cap tech
+NVDA,,,,250.00,Stock,AI/semiconductor
+META,,,,200.00,Stock,mega-cap tech
+V,,,,150.00,Stock,fintech/payment

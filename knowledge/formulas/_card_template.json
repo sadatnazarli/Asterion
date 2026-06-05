@@ -1,0 +1,24 @@
+{
+  "name": "",
+  "slug": "",
+  "category": "",
+  "purpose": "",
+  "formula_latex": "",
+  "plain_english_explanation": "",
+  "inputs": [],
+  "outputs": [],
+  "interpretation": "",
+  "good_thresholds": [],
+  "bad_thresholds": [],
+  "sector_adjustments": [],
+  "failure_modes": [],
+  "common_misuse": [],
+  "implementation_notes": "",
+  "python_function_name": "",
+  "unit_tests_required": [],
+  "source_notes": [],
+  "_meta": {
+    "note": "Card is documentation only. The number is computed by python_function_name in backend/app/quant/formulas/. The LLM never computes this.",
+    "version": "0"
+  }
+}

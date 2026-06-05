@@ -1,0 +1,43 @@
+{
+  "name": "Altman Z-Score",
+  "slug": "altman-z-score",
+  "category": "solvency",
+  "purpose": "Estimate near-term (≈2yr) corporate bankruptcy risk from balance-sheet and earnings ratios.",
+  "formula_latex": "Z = 1.2X_1 + 1.4X_2 + 3.3X_3 + 0.6X_4 + 1.0X_5",
+  "plain_english_explanation": "Weighted blend of working-capital, retained-earnings, EBIT, market-equity-to-liabilities, and sales ratios. Higher = safer. Distinct weightings exist per entity type (original manufacturing, private, and non-manufacturing/service Z'').",
+  "inputs": [
+    "X1 = working_capital / total_assets",
+    "X2 = retained_earnings / total_assets",
+    "X3 = ebit / total_assets",
+    "X4 = market_value_equity / total_liabilities",
+    "X5 = sales / total_assets"
+  ],
+  "outputs": ["z_score (float)", "zone (safe | grey | distress)"],
+  "interpretation": "Original model: Z>2.99 safe, 1.81–2.99 grey, <1.81 distress.",
+  "good_thresholds": ["Z > 2.99 (original)", "Z'' > 2.60 (non-manufacturing)"],
+  "bad_thresholds": ["Z < 1.81 (original)", "Z'' < 1.10 (non-manufacturing)"],
+  "sector_adjustments": [
+    "Non-manufacturing / service: Z'' = 6.56X1 + 3.26X2 + 6.72X3 + 1.05X4 (drops X5).",
+    "Private manufacturing: EBIT/TA multiplier 3.107.",
+    "Banks/insurers/REITs: model not meaningful — exclude, use sector-specific solvency."
+  ],
+  "failure_modes": [
+    "Negative book equity makes X2/X4 unstable.",
+    "Financials and asset-heavy regulated entities mis-scored.",
+    "Stale market cap distorts X4."
+  ],
+  "common_misuse": ["Applying the manufacturing formula to a SaaS/service company.", "Treating Z as a precise probability."],
+  "implementation_notes": "Select variant by GICS sector; return zone enum; on missing input apply sector-median imputation and lower confidence (see normalization/confidence modules).",
+  "python_function_name": "altman_z_score",
+  "unit_tests_required": [
+    "known manufacturing example matches published Z",
+    "non-manufacturing variant uses Z'' weights and drops X5",
+    "negative equity handled without exception",
+    "missing input -> reduced confidence, not crash"
+  ],
+  "source_notes": ["Altman (1968) and subsequent Z''/Z' revisions — public academic finance, original wording."],
+  "_meta": {
+    "note": "Example card anchoring the schema. Computed by altman_z_score() in backend/app/quant/formulas/forensic. LLM never computes this.",
+    "version": "0"
+  }
+}
