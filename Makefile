@@ -1,6 +1,6 @@
 # Asterion local developer commands (M11.5).
 # Thin wrappers over scripts/*.sh — no product logic here.
-.PHONY: start stop health logs restart help
+.PHONY: start stop health logs restart help scan expand
 
 help:
 	@echo "Asterion — local dev commands:"
@@ -9,6 +9,14 @@ help:
 	@echo "  make health   Probe backend/frontend/providers + portfolio sanity"
 	@echo "  make logs     Tail backend + frontend logs"
 	@echo "  make restart  stop then start"
+	@echo "  make scan     Run the Opportunity Scanner once (ranked screen)"
+	@echo "  make expand ARGS='--starter'   Expand the scannable universe (SEC ingest + score)"
+
+scan:
+	@cd backend && .venv/bin/python ../scripts/run_scanner.py
+
+expand:
+	@cd backend && .venv/bin/python ../scripts/expand_universe.py $(ARGS)
 
 start:
 	@bash scripts/start_asterion.sh

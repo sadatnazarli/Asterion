@@ -49,8 +49,25 @@ default.
 - **Portfolio concentration risk** — single-name and theme exposure policy warnings.
 - **Daily contribution analysis** — what moved the book and why.
 - **Market data provider abstraction** — Finnhub / FMP / FRED, swappable, optional.
+- **Opportunity Scanner** — ranks the ingested universe by a transparent
+  composite (value / quality / safety / change) with confidence + evidence
+  links. A *screen*, never a buy/sell call.
 - **Beginner / Pro UI** — progressive disclosure for two audiences.
 - **One-command local launcher** — `make start`, no Docker required.
+
+### Market scanner & expanding the universe
+
+```bash
+make scan                      # rank the current universe (writes a snapshot)
+make expand ARGS='--starter'   # add a curated cross-sector set (SEC ingest + score)
+make expand ARGS='--sector semiconductors'   # or a sector preset
+```
+
+The scanner reads the deterministic valuation scorecards and ranks them — it
+never recommends buying or selling, and confidence drops when inputs are
+missing. `expand_universe.py` is idempotent and resumable (existing scorecards
+are skipped unless `--force`); a name it can't ingest or score is reported and
+skipped, never faked.
 
 ### Example output
 
