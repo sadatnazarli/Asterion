@@ -66,21 +66,48 @@ class Opportunity:
     missing: list[str]                 # missing component names
     valuation_classification: str | None  # the underlying scorecard's own label (context)
     evidence: dict[str, str]           # links to scorecard / ticker
+    # Cross-sectional calibration (filled by app.scanner.calibration). Absolute
+    # values above; these are percentile-ranked vs the ingested universe.
+    components_calibrated: dict[str, float | None] | None = None
+    percentiles: dict[str, float | None] | None = None
+    composite_calibrated: float | None = None
+    classification_calibrated: str | None = None
+    calibration: str = "absolute"
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "ticker": self.ticker,
-            "composite": None if self.composite is None else round(self.composite, 1),
-            "classification": self.classification,
+            # Headline screen score = calibrated when available, else absolute.
+            "composite": self._round(self.composite_calibrated if self.calibration == "cross_sectional" else self.composite),
+            "classification": (
+                self.classification_calibrated if self.calibration == "cross_sectional" and self.classification_calibrated
+                else self.classification
+            ),
             "confidence": round(self.confidence, 2),
             "components": {
-                k: (None if v is None else round(v, 1)) for k, v in self.components.items()
+                k: self._round(v) for k, v in (
+                    (self.components_calibrated or self.components)
+                    if self.calibration == "cross_sectional" else self.components
+                ).items()
             },
+            # Always expose the raw absolute layer for full transparency.
+            "composite_absolute": self._round(self.composite),
+            "classification_absolute": self.classification,
+            "components_absolute": {k: self._round(v) for k, v in self.components.items()},
+            "percentiles": (
+                None if self.percentiles is None
+                else {k: self._round(v) for k, v in self.percentiles.items()}
+            ),
+            "calibration": self.calibration,
             "drivers": self.drivers,
             "missing": self.missing,
             "valuation_classification": self.valuation_classification,
             "evidence": self.evidence,
         }
+
+    @staticmethod
+    def _round(v: float | None) -> float | None:
+        return None if v is None else round(v, 1)
 
 
 def build_opportunity(scorecard: dict[str, Any]) -> Opportunity:
@@ -174,12 +201,22 @@ def _drivers(components: dict[str, float | None]) -> list[str]:
 
 
 def rank_universe(scorecards: list[dict[str, Any]]) -> list[Opportunity]:
-    """Build + rank opportunities. Best screens first; insufficient-data last."""
+    """Build, calibrate, and rank opportunities. Best screens first.
+
+    Ranking uses the *calibrated* (cross-sectional percentile) composite when the
+    universe is large enough; otherwise it falls back to the absolute composite.
+    See ``app.scanner.calibration``.
+    """
     opps = [build_opportunity(sc) for sc in scorecards]
 
+    from app.scanner.calibration import calibrate_universe  # local: avoid import cycle
+    calibrate_universe(opps)
+
     def sort_key(o: Opportunity) -> tuple[int, float, float]:
-        usable = 0 if o.classification == "insufficient_data" else 1
-        comp = o.composite if o.composite is not None else -1.0
+        cls = o.classification_calibrated or o.classification
+        usable = 0 if cls == "insufficient_data" else 1
+        score = o.composite_calibrated if o.calibration == "cross_sectional" else o.composite
+        comp = score if score is not None else -1.0
         return (usable, comp, o.confidence)
 
     return sorted(opps, key=sort_key, reverse=True)

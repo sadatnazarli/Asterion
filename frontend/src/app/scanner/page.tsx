@@ -21,6 +21,7 @@ type Snapshot = {
   universe: number
   disclaimer: string
   weights: Record<string, number>
+  calibration?: { method: string; universe_valued: number; note: string }
   opportunities: Opp[]
 }
 
@@ -73,6 +74,12 @@ export default async function ScannerPage() {
           Composite = value {pctw(snap.weights?.value)} · quality {pctw(snap.weights?.quality)} · safety{' '}
           {pctw(snap.weights?.safety)} · change {pctw(snap.weights?.change)}. Risk signals lower the score.
         </p>
+        {snap.calibration?.method === 'cross_sectional' && (
+          <p className="mt-1 text-2xs text-gold/80">
+            Scores calibrated cross-sectionally — each is a percentile vs the {snap.calibration.universe_valued}-name
+            ingested universe (higher = screens better than more peers).
+          </p>
+        )}
       </Panel>
 
       {opps.length === 0 ? (

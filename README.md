@@ -51,7 +51,13 @@ default.
 - **Market data provider abstraction** — Finnhub / FMP / FRED, swappable, optional.
 - **Opportunity Scanner** — ranks the ingested universe by a transparent
   composite (value / quality / safety / change) with confidence + evidence
-  links. A *screen*, never a buy/sell call.
+  links, **cross-sectionally calibrated** (each score is a percentile vs the
+  ingested universe, so the ranking is relative, not an untuned absolute). A
+  *screen*, never a buy/sell call.
+- **IPO / private-company mode** — verifies an S-1 against SEC EDGAR, parses the
+  filing, and produces a research-only IPO scorecard (valuation, scenario model
+  for negative-FCF names, 7-category risk engine). Never invents numbers, never
+  recommends. Used to analyze e.g. SpaceX (`SPCX`).
 - **Beginner / Pro UI** — progressive disclosure for two audiences.
 - **One-command local launcher** — `make start`, no Docker required.
 
@@ -68,6 +74,22 @@ never recommends buying or selling, and confidence drops when inputs are
 missing. `expand_universe.py` is idempotent and resumable (existing scorecards
 are skipped unless `--force`); a name it can't ingest or score is reported and
 skipped, never faked.
+
+### IPO / private-company mode
+
+```bash
+make ipo                            # verify SpaceX's S-1 on SEC EDGAR + build scorecard
+# or, directly:
+cd backend && .venv/bin/python ../scripts/analyze_ipo_candidate.py SPACEX
+.venv/bin/python ../scripts/analyze_ipo_candidate.py SPACEX --unverified-news-mode
+```
+
+It checks the official source first (never assumes IPO news is real), parses the
+filing for verified figures (with provenance), and writes
+`reports/spacex_source_verification.{md,json}` +
+`reports/SPACEX_IPO_scorecard.{md,json}`. When free cash flow can't be confirmed
+positive it uses a **labeled-speculative scenario model**, not a normal reverse
+DCF. View it in the UI at `/ipo/SPACEX`. Research only — no buy/sell.
 
 ### Example output
 
@@ -180,7 +202,8 @@ This is the core contract:
 ## Roadmap
 
 - Provider beta + macro calibration (live FRED/FMP across the universe)
-- Better 0–100 score calibration
+- Absolute (not just cross-sectional) score calibration — anchor raw 0–100 bands
+  to empirical outcomes (cross-sectional percentile calibration already shipped)
 - Public demo mode (one-command sample dataset)
 - Richer report exports
 - Optional compliance / risk layer (later)

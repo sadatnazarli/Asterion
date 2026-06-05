@@ -45,12 +45,24 @@ def build_snapshot() -> dict[str, Any]:
     """Build the ranked opportunity snapshot from the current scorecards."""
     cards = load_scorecards()
     opps = rank_universe(cards)
+    method = opps[0].calibration if opps else "absolute"
+    valued = sum(1 for o in opps if o.composite is not None)
     return {
         "as_of": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "universe": len(opps),
         "source": "valuation_scorecards",
         "disclaimer": DISCLAIMER,
         "weights": WEIGHTS,
+        "calibration": {
+            "method": method,
+            "universe_valued": valued,
+            "note": (
+                "Screen scores are cross-sectional percentiles vs the ingested "
+                "universe (higher = screens better than more peers)."
+                if method == "cross_sectional" else
+                "Absolute scores (universe too small for cross-sectional calibration)."
+            ),
+        },
         "opportunities": [o.as_dict() for o in opps],
     }
 

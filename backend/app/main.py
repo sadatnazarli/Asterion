@@ -8,7 +8,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import scanner, stream, system, ui
+from app.api.routes import ipo, scanner, stream, system, ui
 from app.core.config import get_settings, load_env_files
 from app.market.router import router as market_router
 from app.scanner.service import (
@@ -43,6 +43,7 @@ app.include_router(ui.router, prefix="/api", tags=["ui"])
 app.include_router(market_router, prefix="/api/market", tags=["market"])
 app.include_router(system.router, prefix="/api/system", tags=["system"])
 app.include_router(scanner.router, prefix="/api/scanner", tags=["scanner"])
+app.include_router(ipo.router, prefix="/api/ipo", tags=["ipo"])
 app.include_router(stream.router, tags=["stream"])
 
 
