@@ -11,6 +11,7 @@ const NAV = [
   { name: 'Market', href: '/market' },
   { name: 'Scanner', href: '/scanner' },
   { name: 'IPO', href: '/ipo/SPACEX' },
+  { name: 'Decision', href: '/decision/META' },
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Risk', href: '/risk' },

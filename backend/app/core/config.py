@@ -112,6 +112,10 @@ class Settings(BaseSettings):
     polygon_api_key: str | None = None
     openfigi_api_key: str | None = None
 
+    # --- Verifex (compliance / entity screening) — optional, no hardcoded URL ---
+    verifex_api_key: str | None = None
+    verifex_api_base_url: str | None = None
+
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
 
@@ -127,7 +131,16 @@ class Settings(BaseSettings):
             self.polygon_api_key = _env_first("ASTERION_POLYGON_API_KEY", "POLYGON_API_KEY")
         if not self.openfigi_api_key:
             self.openfigi_api_key = _env_first("ASTERION_OPENFIGI_API_KEY", "OPENFIGI_API_KEY")
+        if not self.verifex_api_key:
+            self.verifex_api_key = _env_first("ASTERION_VERIFEX_API_KEY", "VERIFEX_API_KEY")
+        if not self.verifex_api_base_url:
+            self.verifex_api_base_url = _env_first("ASTERION_VERIFEX_API_BASE_URL", "VERIFEX_API_BASE_URL")
         return self
+
+    @property
+    def verifex_configured(self) -> bool:
+        """Verifex needs both a key and a base URL before any live call is made."""
+        return bool(self.verifex_api_key and self.verifex_api_base_url)
 
     @property
     def db_dsn(self) -> str:
