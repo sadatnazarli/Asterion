@@ -21,6 +21,9 @@ logger = logging.getLogger("asterion.scanner")
 
 REPORTS_DIR = PROJECT_ROOT / "reports"
 SNAPSHOT_PATH = REPORTS_DIR / "scanner_snapshot.json"
+# Pinned reference distribution for absolute calibration (optional). Built by
+# scripts/build_calibration_profile.py; absent => rubric mode.
+PROFILE_PATH = REPORTS_DIR / "calibration_profile.json"
 
 DISCLAIMER = (
     "Research candidates ranked by deterministic scores. Not investment advice "
@@ -41,12 +44,25 @@ def load_scorecards() -> list[dict[str, Any]]:
     return cards
 
 
+def load_profile() -> dict[str, Any] | None:
+    """Load the pinned absolute-calibration profile, or None if absent/unreadable."""
+    try:
+        with open(PROFILE_PATH, encoding="utf-8") as fh:
+            data = json.load(fh)
+        return data.get("distribution") if isinstance(data, dict) else None
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
 def build_snapshot() -> dict[str, Any]:
     """Build the ranked opportunity snapshot from the current scorecards."""
     cards = load_scorecards()
-    opps = rank_universe(cards)
+    profile = load_profile()
+    opps = rank_universe(cards, profile=profile)
     method = opps[0].calibration if opps else "absolute"
+    abs_method = opps[0].absolute_method if opps else ("empirical_profile" if profile else "rubric")
     valued = sum(1 for o in opps if o.composite is not None)
+    from app.scanner.absolute_calibration import BAND_EDGES, COMPOSITE_GRADES, COMPOSITE_LABELS
     return {
         "as_of": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "universe": len(opps),
@@ -61,6 +77,19 @@ def build_snapshot() -> dict[str, Any]:
                 "universe (higher = screens better than more peers)."
                 if method == "cross_sectional" else
                 "Absolute scores (universe too small for cross-sectional calibration)."
+            ),
+        },
+        "absolute_calibration": {
+            "method": abs_method,
+            "band_edges": list(BAND_EDGES),
+            "composite_labels": list(COMPOSITE_LABELS),
+            "composite_grades": list(COMPOSITE_GRADES),
+            "note": (
+                "Absolute bands are pinned to a frozen reference distribution and "
+                "do not move with the scan."
+                if abs_method == "empirical_profile" else
+                "Absolute bands use a fixed rubric (no pinned profile yet); run "
+                "scripts/build_calibration_profile.py to anchor to observed data."
             ),
         },
         "opportunities": [o.as_dict() for o in opps],

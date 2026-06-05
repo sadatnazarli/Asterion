@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/asterion-logo.png" alt="Asterion" width="420">
+  <img src="docs/assets/screenshots/market-terminal.png" alt="Asterion market terminal" width="900">
 </p>
 
 <h1 align="center">Asterion — Local-First Investment Research Cockpit</h1>
@@ -51,9 +51,10 @@ default.
 - **Market data provider abstraction** — Finnhub / FMP / FRED, swappable, optional.
 - **Opportunity Scanner** — ranks the ingested universe by a transparent
   composite (value / quality / safety / change) with confidence + evidence
-  links, **cross-sectionally calibrated** (each score is a percentile vs the
-  ingested universe, so the ranking is relative, not an untuned absolute). A
-  *screen*, never a buy/sell call.
+  links. **Two calibration layers:** a *cross-sectional* screen score (percentile
+  vs the current scan, drives the ranking) and an *absolute* grade A–E (anchored
+  to a pinned reference distribution, so it's stable across scans). A *screen*,
+  never a buy/sell call.
 - **IPO / private-company mode** — verifies an S-1 against SEC EDGAR, parses the
   filing, and produces a research-only IPO scorecard (valuation, scenario model
   for negative-FCF names, 7-category risk engine). Never invents numbers, never
@@ -65,6 +66,7 @@ default.
 
 ```bash
 make scan                      # rank the current universe (writes a snapshot)
+make calibrate                 # pin the absolute-calibration reference distribution
 make expand ARGS='--starter'   # add a curated cross-sector set (SEC ingest + score)
 make expand ARGS='--sector semiconductors'   # or a sector preset
 ```
@@ -74,6 +76,16 @@ never recommends buying or selling, and confidence drops when inputs are
 missing. `expand_universe.py` is idempotent and resumable (existing scorecards
 are skipped unless `--force`); a name it can't ingest or score is reported and
 skipped, never faked.
+
+Each name carries two reads: a **cross-sectional screen score** (its percentile
+vs the current scan — this drives the ranking) and an **absolute grade A–E**.
+The grade is anchored to a *pinned* reference distribution
+(`reports/calibration_profile.json`, built by `make calibrate`), so it means the
+same thing across scans even as the live universe changes — unlike the
+cross-sectional score, which floats with whoever's in the scan. Re-run
+`make calibrate` after a material universe expansion to re-pin. (Bands are
+anchored to the observed score distribution; fitting them to forward outcomes is
+future work — see roadmap.)
 
 ### IPO / private-company mode
 
@@ -120,15 +132,6 @@ engine. Missing data is flagged, never invented. No buy/sell.
 
 <p align="center">
   <img src="docs/assets/screenshots/ipo-spacex.png" alt="IPO / private-company mode — SpaceX research-only scorecard" width="860">
-</p>
-
-### Market terminal (Pro)
-
-Dense, keyboard-driven market view: live strip, watchlist, and the deterministic
-read on each name.
-
-<p align="center">
-  <img src="docs/assets/screenshots/market-terminal.png" alt="Asterion market terminal (Pro mode)" width="860">
 </p>
 
 ### Forensic scores — every number traceable
@@ -273,8 +276,9 @@ This is the core contract:
 ## Roadmap
 
 - Provider beta + macro calibration (live FRED/FMP across the universe)
-- Absolute (not just cross-sectional) score calibration — anchor raw 0–100 bands
-  to empirical outcomes (cross-sectional percentile calibration already shipped)
+- Outcome-anchored calibration — fit the absolute A–E bands to *forward
+  outcomes* (cross-sectional + pinned-distribution absolute calibration already
+  shipped; the remaining step is anchoring the bands to realized results)
 - Public demo mode (one-command sample dataset)
 - Richer report exports
 - Optional compliance / risk layer (later)

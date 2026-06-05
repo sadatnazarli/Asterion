@@ -73,6 +73,14 @@ class Opportunity:
     composite_calibrated: float | None = None
     classification_calibrated: str | None = None
     calibration: str = "absolute"
+    # Absolute (pinned) calibration (filled by app.scanner.absolute_calibration).
+    # Universe-independent: anchored to a fixed reference, with named bands.
+    components_anchored: dict[str, float | None] | None = None
+    components_band: dict[str, str | None] | None = None
+    composite_anchored: float | None = None
+    composite_band: str | None = None
+    composite_grade: str | None = None
+    absolute_method: str | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -99,6 +107,16 @@ class Opportunity:
                 else {k: self._round(v) for k, v in self.percentiles.items()}
             ),
             "calibration": self.calibration,
+            # Absolute (pinned, universe-independent) layer — always present.
+            "composite_anchored": self._round(self.composite_anchored),
+            "composite_band": self.composite_band,
+            "composite_grade": self.composite_grade,
+            "components_anchored": (
+                None if self.components_anchored is None
+                else {k: self._round(v) for k, v in self.components_anchored.items()}
+            ),
+            "components_band": self.components_band,
+            "absolute_method": self.absolute_method,
             "drivers": self.drivers,
             "missing": self.missing,
             "valuation_classification": self.valuation_classification,
@@ -200,17 +218,26 @@ def _drivers(components: dict[str, float | None]) -> list[str]:
     return out
 
 
-def rank_universe(scorecards: list[dict[str, Any]]) -> list[Opportunity]:
+def rank_universe(
+    scorecards: list[dict[str, Any]], *, profile: dict | None = None,
+) -> list[Opportunity]:
     """Build, calibrate, and rank opportunities. Best screens first.
 
-    Ranking uses the *calibrated* (cross-sectional percentile) composite when the
-    universe is large enough; otherwise it falls back to the absolute composite.
-    See ``app.scanner.calibration``.
+    Two calibration layers are attached to every name:
+    - **cross-sectional** (``app.scanner.calibration``) — percentile vs *this*
+      scan; drives the ranking when the universe is large enough, else falls back
+      to the absolute composite.
+    - **absolute / pinned** (``app.scanner.absolute_calibration``) — anchored to a
+      fixed reference (the optional ``profile``) with named bands; universe-
+      independent, for stable interpretation. Does not affect ordering.
     """
     opps = [build_opportunity(sc) for sc in scorecards]
 
-    from app.scanner.calibration import calibrate_universe  # local: avoid import cycle
+    # local imports: avoid import cycle
+    from app.scanner.absolute_calibration import calibrate_absolute
+    from app.scanner.calibration import calibrate_universe
     calibrate_universe(opps)
+    calibrate_absolute(opps, profile=profile)
 
     def sort_key(o: Opportunity) -> tuple[int, float, float]:
         cls = o.classification_calibrated or o.classification

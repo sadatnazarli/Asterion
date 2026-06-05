@@ -24,7 +24,7 @@ test('scanner — ranked screen (calibrated)', async ({ page }) => {
   // tall viewport (not fullPage) is what reveals more of the ranked list.
   await page.setViewportSize({ width: 1600, height: 1500 })
   await page.goto('/scanner', { waitUntil: 'domcontentloaded' })
-  await expect(page.getByText('Opportunity Scanner')).toBeVisible()
+  await expect(page.getByText('Opportunity Scanner').first()).toBeVisible()
   await settle(page)
   await page.screenshot({ path: '../screenshots/m13_scanner.png' })
 })

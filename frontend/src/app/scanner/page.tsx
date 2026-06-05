@@ -11,6 +11,10 @@ type Opp = {
   classification: 'screens_well' | 'neutral' | 'screens_poorly' | 'insufficient_data'
   confidence: number
   components: { value: number | null; quality: number | null; safety: number | null; change: number | null }
+  composite_anchored: number | null
+  composite_band: string | null
+  composite_grade: string | null
+  absolute_method: string | null
   drivers: string[]
   missing: string[]
   valuation_classification: string | null
@@ -22,7 +26,17 @@ type Snapshot = {
   disclaimer: string
   weights: Record<string, number>
   calibration?: { method: string; universe_valued: number; note: string }
+  absolute_calibration?: { method: string; band_edges: number[]; note: string }
   opportunities: Opp[]
+}
+
+// Absolute-grade chip tone: A/B = gold-ish, C neutral, D/E down.
+const GRADE_TONE: Record<string, string> = {
+  A: 'bg-gold/15 text-gold ring-1 ring-gold/30',
+  B: 'bg-up/12 text-up ring-1 ring-up/25',
+  C: 'bg-white/[0.06] text-mutedForeground',
+  D: 'bg-down/10 text-down/90 ring-1 ring-down/20',
+  E: 'bg-down/12 text-down ring-1 ring-down/25',
 }
 
 const CLASS_META: Record<Opp['classification'], { label: string; chip: string; score: string }> = {
@@ -76,8 +90,16 @@ export default async function ScannerPage() {
         </p>
         {snap.calibration?.method === 'cross_sectional' && (
           <p className="mt-1 text-2xs text-gold/80">
-            Scores calibrated cross-sectionally — each is a percentile vs the {snap.calibration.universe_valued}-name
+            Screen score calibrated cross-sectionally — a percentile vs the {snap.calibration.universe_valued}-name
             ingested universe (higher = screens better than more peers).
+          </p>
+        )}
+        {snap.absolute_calibration && (
+          <p className="mt-1 text-2xs text-faint">
+            Grade (A–E) is an <span className="text-mutedForeground">absolute</span> read —{' '}
+            {snap.absolute_calibration.method === 'empirical_profile'
+              ? 'anchored to a pinned reference distribution, so it does not move with the scan.'
+              : 'a fixed band rubric (no pinned profile yet).'}
           </p>
         )}
       </Panel>
@@ -112,6 +134,14 @@ export default async function ScannerPage() {
                     </div>
                     <div className="mt-0.5 text-2xs uppercase tracking-label text-faint">screen</div>
                   </div>
+                  {o.composite_grade && (
+                    <div className="ml-1 text-center" title={`Absolute grade — anchored ${o.composite_anchored ?? '—'}`}>
+                      <span className={`inline-block rounded px-1.5 py-0.5 text-sm font-bold leading-none ${GRADE_TONE[o.composite_grade] ?? GRADE_TONE.C}`}>
+                        {o.composite_grade}
+                      </span>
+                      <div className="mt-1 text-2xs lowercase tracking-label text-faint">{o.composite_band}</div>
+                    </div>
+                  )}
                 </div>
 
                 {/* component bars */}
