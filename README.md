@@ -96,6 +96,59 @@ DCF. View it in the UI at `/ipo/SPACEX`. Research only — no buy/sell.
 A generated company valuation scorecard (public-company data, no personal info):
 [`examples/reports/NVDA_valuation_scorecard.md`](examples/reports/NVDA_valuation_scorecard.md).
 
+## Screenshots
+
+> Demo data only — no personal holdings, no broker data, no secrets.
+
+### Market terminal (Pro)
+
+Dense, keyboard-driven market view: live strip, watchlist, and the deterministic
+read on each name.
+
+<p align="center">
+  <img src="docs/assets/screenshots/market-terminal.png" alt="Asterion market terminal (Pro mode)" width="860">
+</p>
+
+### Forensic scores — every number traceable
+
+Accrual, dilution, reflexivity, and thesis-fragility signals on a ticker, each
+with confidence and provenance. No LLM arithmetic.
+
+<p align="center">
+  <img src="docs/assets/screenshots/ticker-scores.png" alt="Ticker forensic scores with provenance" width="860">
+</p>
+
+### Dashboard & portfolio
+
+<p align="center">
+  <img src="docs/assets/screenshots/dashboard.png" alt="Asterion dashboard" width="430">
+  <img src="docs/assets/screenshots/portfolio.png" alt="Portfolio view" width="430">
+</p>
+
+### Concentration risk & coverage
+
+Single-name / theme exposure policy warnings, and honest data-coverage
+reporting (missing is shown as missing).
+
+<p align="center">
+  <img src="docs/assets/screenshots/risk.png" alt="Portfolio concentration risk" width="430">
+  <img src="docs/assets/screenshots/coverage.png" alt="Data coverage" width="430">
+</p>
+
+### Beginner mode — progressive disclosure
+
+Same engine, gentler surface: guided onboarding and a simplified market read for
+non-pros.
+
+<p align="center">
+  <img src="docs/assets/screenshots/onboarding-beginner.png" alt="Beginner onboarding" width="430">
+  <img src="docs/assets/screenshots/market-beginner.png" alt="Beginner market view" width="430">
+</p>
+
+> The **Opportunity Scanner** (`/scanner`, cross-sectionally calibrated) and
+> **IPO / private-company mode** (`/ipo/SPACEX`) screens ship in this build —
+> run `make scan` and `make ipo` to generate them locally.
+
 ## Architecture
 
 ```
