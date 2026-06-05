@@ -100,6 +100,28 @@ A generated company valuation scorecard (public-company data, no personal info):
 
 > Demo data only — no personal holdings, no broker data, no secrets.
 
+### Opportunity Scanner — calibrated ranked screen
+
+The ingested universe ranked by a transparent composite (value / quality /
+safety / change), **cross-sectionally calibrated** so each score is a percentile
+vs the universe. Confidence + evidence links on every row. A screen, never a
+buy/sell call.
+
+<p align="center">
+  <img src="docs/assets/screenshots/scanner.png" alt="Opportunity Scanner — cross-sectionally calibrated ranked screen" width="860">
+</p>
+
+### IPO / private-company mode — SpaceX
+
+Verifies the S-1 against SEC EDGAR first, parses it for figures with provenance,
+and builds a **research-only** scorecard: valuation, a labeled-speculative
+scenario model (FCF can't be confirmed positive), and a 7-category IPO risk
+engine. Missing data is flagged, never invented. No buy/sell.
+
+<p align="center">
+  <img src="docs/assets/screenshots/ipo-spacex.png" alt="IPO / private-company mode — SpaceX research-only scorecard" width="860">
+</p>
+
 ### Market terminal (Pro)
 
 Dense, keyboard-driven market view: live strip, watchlist, and the deterministic
@@ -144,10 +166,6 @@ non-pros.
   <img src="docs/assets/screenshots/onboarding-beginner.png" alt="Beginner onboarding" width="430">
   <img src="docs/assets/screenshots/market-beginner.png" alt="Beginner market view" width="430">
 </p>
-
-> The **Opportunity Scanner** (`/scanner`, cross-sectionally calibrated) and
-> **IPO / private-company mode** (`/ipo/SPACEX`) screens ship in this build —
-> run `make scan` and `make ipo` to generate them locally.
 
 ## Architecture
 
