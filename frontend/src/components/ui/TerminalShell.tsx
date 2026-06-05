@@ -9,6 +9,7 @@ import { OnboardingModal, GuideButton } from '@/components/onboarding/Onboarding
 
 const NAV = [
   { name: 'Market', href: '/market' },
+  { name: 'Scanner', href: '/scanner' },
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Risk', href: '/risk' },
