@@ -65,10 +65,29 @@ echo "• Starting backend (FastAPI) on :$BACKEND_PORT …"
 BACKEND_PID=$!
 
 # ── start frontend ─────────────────────────────────────────────────────────
-echo "• Starting frontend (Next.js) on :$FRONTEND_PORT …"
+# Default: production build + `next start`. This removes Next's per-route
+# on-demand compilation, which is the main cause of slow category switching in
+# dev. Set ASTERION_DEV=1 for hot-reload dev mode instead.
+DEV_MODE="${ASTERION_DEV:-0}"
+if [ "$DEV_MODE" = "1" ]; then
+  FRONTEND_MODE="dev (hot reload)"
+  FRONTEND_CMD="npm run dev"
+else
+  FRONTEND_MODE="production (fast nav)"
+  echo "• Building frontend production bundle (one-time, ~30–60s; set ASTERION_DEV=1 to skip) …"
+  if ! ( cd "$FRONTEND" && npm run build ) >"$LOGS/frontend-build.log" 2>&1; then
+    red "✗ Frontend build failed. Tail the log:"
+    echo "  tail -n 40 $LOGS/frontend-build.log"
+    exit 1
+  fi
+  green "✓ Frontend build complete"
+  FRONTEND_CMD="npm run start"
+fi
+
+echo "• Starting frontend (Next.js, $FRONTEND_MODE) on :$FRONTEND_PORT …"
 (
   cd "$FRONTEND"
-  exec npm run dev
+  exec $FRONTEND_CMD
 ) >"$LOGS/frontend.log" 2>&1 &
 FRONTEND_PID=$!
 
@@ -114,7 +133,7 @@ fi
 echo
 green "Asterion is running."
 echo "  Backend:  $BACKEND_URL   (pid $BACKEND_PID)"
-echo "  Frontend: $FRONTEND_URL   (pid $FRONTEND_PID)"
+echo "  Frontend: $FRONTEND_URL   (pid $FRONTEND_PID, $FRONTEND_MODE)"
 echo "  Market:   $MARKET_URL"
 echo "  Logs:     $LOGS/backend.log, $LOGS/frontend.log"
 echo "  Browser:  $BROWSER_OPENED"

@@ -17,6 +17,10 @@
   --color-warn: #d6a121;
   --color-accent: #4c8dff;
   --color-teal: #2bb6a3;
+  /* brand gold (logo) — signature accent */
+  --color-gold: #f5b73d;
+  --color-gold-bright: #ffd982;
+  --color-gold-muted: #c4922b;
 }
 
 @layer base {
@@ -33,7 +37,14 @@
     font-feature-settings: 'cv01', 'cv03', 'cv04', 'ss01';
   }
   ::selection {
-    background-color: rgba(76, 141, 255, 0.28);
+    background-color: rgba(245, 183, 61, 0.26);
+    color: #fff;
+  }
+  /* one calm, consistent focus ring — gold, only on keyboard nav */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1.5px var(--color-background), 0 0 0 3px rgba(245, 183, 61, 0.55);
+    border-radius: 0.25rem;
   }
   /* tabular numerics everywhere money/scores live */
   .num {
@@ -92,7 +103,7 @@
   opacity: 0.5;
 }
 
-/* soft accent stripe for the primary insight module */
+/* gold brand stripe for the one primary insight module per screen */
 .accent-stripe {
   position: relative;
 }
@@ -103,5 +114,74 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--color-accent), rgba(76, 141, 255, 0.15));
+  background: linear-gradient(180deg, var(--color-gold-bright), rgba(245, 183, 61, 0.12));
+}
+
+/* skeleton shimmer — used by loading.tsx for instant, polished nav */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-panel2);
+  border-radius: 0.3125rem;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.045),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* subtle content entrance — applied to page roots; respects reduced-motion */
+.page-enter {
+  animation: fade-rise 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes fade-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .skeleton::after {
+    animation: none;
+  }
+  .page-enter {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* faint gold top-highlight for elevated/brand panels */
+.brand-top {
+  position: relative;
+}
+.brand-top::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 183, 61, 0.35),
+    transparent
+  );
 }

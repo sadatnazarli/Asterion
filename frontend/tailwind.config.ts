@@ -27,8 +27,13 @@ const config: Config = {
         up: '#3fb950', // calm terminal green
         down: '#e5534b', // institutional red
         warn: '#d6a121', // muted warning gold
-        accent: '#4c8dff', // Bloomberg-ish active blue, used sparingly
+        accent: '#4c8dff', // Bloomberg-ish active blue, interactive/secondary
         teal: '#2bb6a3', // optional accent, sparing
+        // brand — the gold compass star from the logo. Signature accent: active
+        // nav, primary insight, focus. Used with intent, never decoration.
+        gold: '#f5b73d',
+        goldBright: '#ffd982',
+        goldMuted: '#c4922b',
         // back-compat aliases (legacy /live components still reference these)
         card: '#11151c',
         cardForeground: '#e6e9ef',
@@ -57,6 +62,21 @@ const config: Config = {
         // very subtle lift for the one primary module per screen
         panel: '0 1px 0 0 rgba(255,255,255,0.02) inset, 0 1px 2px 0 rgba(0,0,0,0.4)',
         elev: '0 2px 8px -2px rgba(0,0,0,0.5), 0 1px 0 0 rgba(255,255,255,0.03) inset',
+        // soft gold glow for the active/brand element — barely there
+        gold: '0 0 0 1px rgba(245,183,61,0.20), 0 2px 12px -4px rgba(245,183,61,0.25)',
+      },
+      keyframes: {
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'fade-rise': {
+          '0%': { opacity: '0', transform: 'translateY(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 1.4s infinite',
+        'fade-rise': 'fade-rise 0.32s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },

@@ -19,16 +19,24 @@ export function MetricTile({
   value: ReactNode
   sub?: ReactNode
   missingReason?: string
-  tone?: 'default' | 'up' | 'down' | 'warn'
+  tone?: 'default' | 'up' | 'down' | 'warn' | 'gold'
   help?: string
   explain?: string
 }) {
   const isMissing = value === '—' || value === null || value === undefined
   const toneColor =
-    tone === 'up' ? 'text-up' : tone === 'down' ? 'text-down' : tone === 'warn' ? 'text-warn' : 'text-foreground'
+    tone === 'up'
+      ? 'text-up'
+      : tone === 'down'
+        ? 'text-down'
+        : tone === 'warn'
+          ? 'text-warn'
+          : tone === 'gold'
+            ? 'text-gold'
+            : 'text-foreground'
 
   return (
-    <div className="rounded-md border border-white/[0.05] bg-panel px-3 py-2.5 transition-colors hover:bg-panel2">
+    <div className="group rounded-md border border-white/[0.05] bg-panel px-3 py-2.5 transition-all duration-150 hover:-translate-y-px hover:border-white/[0.09] hover:bg-panel2 hover:shadow-elev">
       <div className="flex items-center gap-1">
         <span className="label">{label}</span>
         {help && <HelpTip text={help} label={label} />}

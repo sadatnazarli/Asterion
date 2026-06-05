@@ -27,7 +27,7 @@ export function Panel({
       data-testid={testId}
       className={`relative overflow-hidden rounded-md border border-white/[0.06] ${
         elevated ? 'bg-panel2 shadow-elev' : 'bg-panel shadow-panel'
-      } ${accent ? 'accent-stripe' : ''} ${className}`}
+      } ${accent ? 'accent-stripe brand-top' : ''} ${className}`}
     >
       {(title || right) && (
         <header className="flex items-center justify-between border-b border-white/[0.05] px-3 py-2">
